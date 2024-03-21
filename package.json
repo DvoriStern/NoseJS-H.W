@@ -1,0 +1,18 @@
+{
+  "name": "lsn5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.cjs",
+  "scripts": {
+    "start": "node app.cjs",
+    "dev": "node --watch app.cjs"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mongoose": "^8.1.2"
+  }
+}
