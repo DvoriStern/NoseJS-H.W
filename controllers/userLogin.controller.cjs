@@ -6,6 +6,7 @@ exports.signIn = async (req, res, next) => {
 
     const user = await UserLogin.findOne({ email })
 
+    
     if (user) {
         bcrypt.compare(password, user.password, (err, same) => {
             if (err)
