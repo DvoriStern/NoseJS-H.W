@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {Book}= require("../models/book.model.cjs");
+const {Book, bookValidator}= require("../models/book.model.cjs");
 
 exports.getAllBooks = async (req, res, next) => {
     try {
@@ -27,13 +27,24 @@ exports.getBookById = (req, res, next) => {
     }
 };
 exports.addBook = async (req, res, next) => {
+    // const v=bookValidator.newSchema.validate(req.body);
+    // if(v){
     try {
+        console.log(req.user);
+        if (req.user.role === "admin") {
         const b = new Book(req.body);
         await b.save(); // מנסה לשמור במסד נתונים
         return res.status(201).json(b); // כאן יהיו כל הנתונים של האוביקט שנשמר במ"נ
+        }
+        else {
+            next({ message: 'only admin can add course', status: 403 })
+        }
     } catch (error) {
         next(error);
     }
+//   } else {
+//     return next({ message: "details not correct", status: 401 });
+//   }
 };
 exports.updateBook = async (req, res, next) => {
     const id = req.params.id;
